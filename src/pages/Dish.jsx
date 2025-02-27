@@ -1,12 +1,32 @@
 import { FaLeaf } from "react-icons/fa";
 import { food_items } from "../helper/Food";
+import { useEffect, useState } from "react";
 
-function Dish()
+function Dish({categoryName, search})
 {
+    const[newFood, setFoodItems] = useState([]);
+    useEffect(()=>{
+        if (categoryName == 'All') {
+            setFoodItems(food_items);
+        } else {
+            const newFoodList = food_items.filter((item) => item.food_category == categoryName.toLowerCase());
+            setFoodItems(newFoodList);
+        }
+    }, [categoryName])
+   
+    useEffect(()=> {
+        if (search.length > 0) {
+            const searchFoodList = food_items.filter((item)=> item.food_name.toLocaleLowerCase().includes(search.toLocaleLowerCase()));
+            setFoodItems(searchFoodList);
+        } else {
+            setFoodItems(food_items);
+        }
+    }, [search])
+    
     return (
         <>  
             {
-                food_items.map((item, index) => (
+                newFood.map((item, index) => (
                     <div className="w-[300px] h-[400px] bg-white p-4 rounded-lg flex flex-col gap-3 hover:border-2 border-green-400">
                         <div className="w-[100%] h-[60%] overflow-hidden rounded-lg">
                             <img src={item.food_image} className="object-cover" alt="" srcset="" />

@@ -8,16 +8,26 @@ import Dish from './pages/Dish'
 
 function App() {
   const [count, setCount] = useState(0)
+  const [category, setCategory] = useState('All');
+  const [search, setSearch] = useState('');
+  const categoryHandler = (categoryName) =>
+  { 
+    setCategory(categoryName);
+  }
 
+  const searchHandler = (searchValue) => {
+    setSearch(searchValue);
+  }
+  
   return (
     <div className='w-full bg-slate-200 min-h-screen p-8'>
 
-      <Nav/>
+      <Nav onChangeSearch={searchHandler}/>
 
-      <Categories/>
+      <Categories onClickCategory={categoryHandler}/>
 
      <div className='w-full flex flex-wrap gap-5 px-5 justify-center items-center pt-8'>
-        <Dish/>
+        <Dish categoryName={category} search={search}/>
      </div>
     </div>
     

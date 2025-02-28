@@ -1,8 +1,14 @@
+import { useContext } from "react";
 import CategoryData from "../helper/CategoryData"
+import { dataContext } from "../context/UserContext";
 
-function Categories({onClickCategory})
+function Categories()
 {
-    
+    const {setCategory} = useContext(dataContext);
+    function onClickCategory(itemName)
+    {
+        setCategory(itemName);
+    }
     return (
         <>
             <div className='flex flex-wrap justify-center items-center gap-6 w-[100%]'>

@@ -2,8 +2,14 @@
 import { IoFastFoodSharp } from "react-icons/io5";
 import { CiSearch } from "react-icons/ci";
 import { CiShoppingCart } from "react-icons/ci";
-function Nav({onChangeSearch})
+import { createContext, useContext } from "react";
+import { dataContext } from "../context/UserContext";
+function Nav()
 {
+    let {setInput, setCartOpen} = useContext(dataContext);
+    function onChangeSearch(e) {
+        setInput(e);
+    }
     return (
         <>
             <div className="w-full h-[100px] flex justify-between">
@@ -16,7 +22,7 @@ function Nav({onChangeSearch})
                     <input className="w-full h-[50px] outline-none text-[15px]" placeholder="Search your dish...." onChange={(e)=> onChangeSearch(e.target.value)}/>
                 </form>
 
-                <div className="w-[60px] h-[60px] bg-white shadow-lg rounded-md flex justify-center items-center relative">
+                <div className="w-[60px] h-[60px] bg-white shadow-lg rounded-md flex justify-center items-center relative cursor-pointer" onClick={() => setCartOpen(true)}>
                     <span className="absolute text-green-500 top-0 right-2">0</span>
                     <CiShoppingCart className="text-green-500 w-[40px] h-[40px]"/>
                 </div>

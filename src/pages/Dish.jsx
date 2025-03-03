@@ -2,11 +2,14 @@ import { FaLeaf } from "react-icons/fa";
 import { food_items } from "../helper/Food";
 import { createContext, useContext, useEffect, useState } from "react";
 import { dataContext } from "../context/UserContext";
+import { useDispatch } from "react-redux";
+import { AddItem } from "../redux/features/cart/cartSlice";
 
 function Dish()
 {
     const {input, category} = useContext(dataContext);
     const[foods, setFoodItems] = useState(food_items);
+    const dispatch = useDispatch();
     useEffect(()=>{
         if (category == 'All') {
             setFoodItems(food_items);
@@ -47,7 +50,7 @@ function Dish()
                             </div>
                         </div>
 
-                        <button className="w-full p-2 bg-green-400 rounded-lg font-bold hover:bg-green-200" >Add to Dish</button>
+                        <button className="w-full p-2 bg-green-400 rounded-lg font-bold hover:bg-green-200" onClick={() => dispatch(AddItem({id: item.id, name: item.food_name, image: item.food_image, price:item.price, qty:1}))} >Add to Dish</button>
                     </div>
                 ))
             }

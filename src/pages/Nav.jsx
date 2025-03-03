@@ -4,12 +4,14 @@ import { CiSearch } from "react-icons/ci";
 import { CiShoppingCart } from "react-icons/ci";
 import { createContext, useContext } from "react";
 import { dataContext } from "../context/UserContext";
+import { useSelector } from "react-redux";
 function Nav()
 {
     let {setInput, setCartOpen} = useContext(dataContext);
     function onChangeSearch(e) {
         setInput(e);
     }
+    let cartInfos = useSelector((state) => state.cart);
     return (
         <>
             <div className="w-full h-[100px] flex justify-between">
@@ -23,7 +25,7 @@ function Nav()
                 </form>
 
                 <div className="w-[60px] h-[60px] bg-white shadow-lg rounded-md flex justify-center items-center relative cursor-pointer" onClick={() => setCartOpen(true)}>
-                    <span className="absolute text-green-500 top-0 right-2">0</span>
+                    <span className="absolute text-green-500 top-0 right-2"> { cartInfos.length }</span>
                     <CiShoppingCart className="text-green-500 w-[40px] h-[40px]"/>
                 </div>
             </div>

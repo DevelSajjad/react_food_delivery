@@ -6,8 +6,6 @@ import { DecrementItem, IncrementItem, RemoveItem } from '../redux/features/cart
 
 function CartInfo({item}) {
     const dispatch = useDispatch();
-    const [increment, setIncrement] = useState(1);
-    const [decrement, setDecrement] = useState(1);
   return (
     <>
         <div className='w-full h-[125px] bg-white shadow-2xl rounded-md p-3 flex justify-between mb-5'>
